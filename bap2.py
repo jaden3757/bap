@@ -14,7 +14,7 @@ bap.sendm("start")
 
 time.sleep(5)
 
-aaa = len(bot.getUpdates(offset = -10))
+#aaa = len(bot.getUpdates(offset = -10))
 # print(aaa)
 up_check = len(bot.getUpdates())
 print(up_check)
