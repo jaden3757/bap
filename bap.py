@@ -3,8 +3,8 @@
 from selenium import webdriver
 import telegram
 import time
+from bap3 import *
 from datetime import date
-
 
 my_token = '1353878249:AAE886CdaD4FrDiZsPFoNZj0V03EhEjDUPE'
 
@@ -18,8 +18,9 @@ list2 = {1: '난류', 2: '우유', 3: '메밀', 4: '땅콩', 5: '대두', 6: '�
 al_name = []
 al_list = []
 #print(list2)
-def sendm(msg):
-	bot.sendMessage(chat_id = '@ymschool', text = msg)
+
+# def sendm(msg):
+# 	bot.sendMessage(chat_id = bap2.getid(), text = msg)
 
 def timecutter(date, mode):
 	i = 0
@@ -76,7 +77,6 @@ def alcheck(username):
 		sendm("당신의 알레르기 정보가 등록되지 않았습니다.")
 	else:
 		getbap(1, findnum(username))
-
 
 # l = 0
 # while l == 0:
@@ -158,6 +158,9 @@ def getbap(mode1, usernum):
 	# month1 = 8
 	# day1 = 21
 	ok = 0
+
+	# def sendm(msg):
+	# 	bot.sendMessage(chat_id = bot.getUpdates()[-1]['channel_post']['chat']['id'], text = msg)
 
 	while ok == 0:
 		date2 = (driver.find_element_by_xpath('//*[@id="root"]/header/div/button[2]/span[1]/h2').text)
