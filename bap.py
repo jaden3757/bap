@@ -63,12 +63,49 @@ def setal(uname, alist):
 		al_list.append(alist)
 	else:
 		al_list[al_num] = alist
-	
-def findnum(uname):
+
+def addal(uid, alist):
 	i = 0
 	al_num = -1
 	while i < len(al_name):
-		if al_name[i] == uname:
+		if al_name[i] == uid:
+			al_num = i
+		i = i + 1
+	if al_num == -1:
+		al_name.append(uid)
+		al_list.append([])
+		i = 0
+		while i < len(al_name):
+			if al_name[i] == uid:
+				al_num = i
+			i = i + 1
+		if listc(alist, al_list[al_num]) == 1:
+			i = 0
+			while i < len(al_list[al_num]):
+				if al_list[al_num][i] == alist:
+					del al_list[al_num][i]
+				i = i + 1
+			bot.sendMessage(chat_id = uid, text = "%s을(를) 제거했습니다" % alist)
+			return 0
+		al_list[al_num].append(alist)
+		bot.sendMessage(chat_id = uid, text = "%s을(를) 추가했습니다" % alist)
+	else:
+		if listc(alist, al_list[al_num]) == 1:
+			i = 0
+			while i < len(al_list[al_num]):
+				if al_list[al_num][i] == alist:
+					del al_list[al_num][i]
+				i = i + 1
+			bot.sendMessage(chat_id = uid, text = "%s을(를) 제거했습니다" % alist)
+			return 0
+		al_list[al_num].append(alist)
+		bot.sendMessage(chat_id = uid, text = "%s을(를) 추가했습니다" % alist)
+
+def findnum(uid):
+	i = 0
+	al_num = -1
+	while i < len(al_name):
+		if al_name[i] == uid:
 			return i
 	return -1
 
@@ -77,6 +114,17 @@ def alcheck(username):
 		sendm("당신의 알레르기 정보가 등록되지 않았습니다.")
 	else:
 		getbap(1, findnum(username))
+
+def showlist1(id2):
+	if findnum(id2) == -1:
+		bot.sendMessage(chat_id = id2, text = "당신의 알레르기 정보가 등록되지 않았습니다.")
+	else:
+		bot.sendMessage(chat_id = id2, text = "알레르기 목록 : %s" % al_list[findnum(id2)])
+
+def listre(id2):
+	if findnum(id2) > -1:
+		al_list[findnum(id2)] = []
+		bot.sendMessage(chat_id = id2, text = "당신의 알레르기 목록을 초기화했습니다")
 
 # l = 0
 # while l == 0:
